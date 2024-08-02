@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle Flip</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background {
+            background-image: url('img1.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            /* Enable vertical alignment */
+            flex-direction: column;
+            align-items: center;
+            /* Center elements vertically */
+            justify-content: center;
+            /* Center elements horizontally (optional) */
+        }
+
+        .background img {
+            display: block;
+            /* Ensure image takes full width */
+            max-width: 100%;
+            /* Prevent image overflow */
+            margin-bottom: 2rem;
+            /* Add some spacing below image */
+        }
+
+        #play {
+            cursor: pointer;
+            background: none;
+            border: none;
+            animation: mymove 2s infinite;
+        }
+
+        @keyframes mymove {
+            50% {
+                transform: rotate(20deg)
+            }
+        }
+
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100vw);
+            }
+
+            100% {
+                transform: translateX(0)
+            }
+        }
+
+        @media (max-width: 576px) {
+            #play {
+               width: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <img src="i1.gif" alt="Jungle Flip Heading">
+        <button id="play"><img width="200px" src="buttonlogo.png" alt=""></button>
+    </div>
+
+    <audio id="background-music" src="jungleSound.mp3" loop></audio>
+    <script>
+
+        // for apply sound music
+        document.addEventListener('DOMContentLoaded', () => {
+            const backgroundMusic = document.getElementById('background-music');
+
+            const playBackgroundMusic = () => {
+                backgroundMusic.play().catch(() => {
+                    // Ignore errors
+                });
+                localStorage.setItem('isPlaying', 'true');
+                document.removeEventListener('mouseover', playBackgroundMusic);
+            };
+
+            document.addEventListener('mouseover', playBackgroundMusic);
+        });
+
+        // Link the second page
+        document.getElementById('play').addEventListener('click', () => {
+            window.location.href = "secondPage.html";
+        });  
+    </script>
+</body>
+
+</html>
